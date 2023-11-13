@@ -54,15 +54,19 @@ const TodoList = () => {
     const [inputValue,setInputValue]=useState("")
 
     document.body.style = 'background:#3ad4b0'
-    const handleSubmit=(e)=>{
-        e.preventDefault()
-        //console.log('submit')
-
-        //validation
-        inputValue === "" && alert('Please add item!')
-        setTodos([...todos,inputValue.toUpperCase()])
+    const handleSubmit = (e) => {
+        e.preventDefault();
+      
+        // validation
+        if (inputValue === "") {
+          alert('Please add item!');
+          return;
+        }
+      
+        setTodos([...todos, inputValue.toUpperCase()]);
         setInputValue("");
-    }
+        document.getElementById("todo-input").value = "";
+      }
 
     const handleInputChange=(e)=>{
         setInputValue(e.target.value)
@@ -80,7 +84,7 @@ const TodoList = () => {
     <TodoListStyle>
         <h1>Todo List</h1>
         <form onSubmit={handleSubmit}>
-            <input placeholder="Add todo" onChange={handleInputChange}/>
+            <input placeholder="Add todo" onChange={handleInputChange} id={'todo-input'}/>
             <button type="submit">Add</button>
         </form>
         <ul>
